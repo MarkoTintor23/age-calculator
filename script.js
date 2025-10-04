@@ -1,42 +1,89 @@
-class Age {
-  constructor() {
-    this.calculateBtn = document.querySelector("#calculate-btn");
-    this.result = document.querySelector("#age");
-    this.today = new Date();
-    this.currentYear = this.today.getFullYear();
+//poslednja cifra broja =====================================
 
-    this.addEventListeners();
+function pom(broj) {
+  return Math.abs(broj % 10);
+}
+
+function sumaPoslednjihCifara(niz) {
+  let suma = 0;
+  for (let i = 0; i < niz.length; i++) {
+    suma += pom(niz[i]);
   }
+  return suma;
+}
 
-  addEventListeners() {
-    this.calculateBtn.addEventListener("click", () => this.calcAge());
-  }
+let brojevi = [16, 45, 12, 1, 2, 66];
+console.log(sumaPoslednjihCifara(brojevi));
 
-  calcAge() {
-    const inputAge = document.querySelector("#dob").value;
-    if (!inputAge) {
-      this.result.textContent = "Please enter correct date of birth";
-      return;
-    }
+//predzadnji broj ============================================
 
-    const birthDate = new Date(inputAge);
-    const birthYear = birthDate.getFullYear();
-    const birthMonth = birthDate.getMonth();
-    const birthDay = birthDate.getDate();
-
-    let age = this.currentYear - birthYear;
-
-    const currentMonth = this.today.getMonth();
-    const currentDay = this.today.getDate();
-    if (
-      currentMonth < birthMonth ||
-      (currentMonth === birthMonth && currentDay < birthDay)
-    ) {
-      age--;
-    }
-
-    this.result.textContent = `${age}`;
+function test(num) {
+  if (num > 0 && num < 10) {
+    return 0;
+  } else {
+    let floor = Math.floor(num / 10);
+    let digit = floor % 10;
+    return digit;
   }
 }
 
-const newlyAge = new Age();
+function glavna(niz) {
+  let sum = 0;
+  for (let i = 0; i < niz.length; i++) {
+    sum += test(niz[i]);
+  }
+  return sum;
+}
+
+console.log(glavna(brojevi));
+
+// prva cifra broja =================================================
+
+function prva(broj) {
+  let abstraktni = Math.abs(broj);
+  if (abstraktni < 10) {
+    return abstraktni;
+  }
+  while (abstraktni >= 10) {
+    abstraktni = Math.floor(abstraktni / 10);
+  }
+  return abstraktni;
+}
+console.log(prva(443));
+
+function glavnaFunkcija2(niz) {
+  let sum = 0;
+
+  for (let i = 0; i < niz.length; i++) {
+    sum += prva(niz[i]);
+  }
+  return sum;
+}
+
+console.log(glavnaFunkcija2(brojevi));
+
+function test2(broj) {
+  let sumParni = 0;
+  let broj1 = Math.abs(broj);
+
+  while (broj1 > 0) {
+    let poslednjaCifra = broj1 % 10;
+    if (poslednjaCifra % 2 === 0) {
+      sumParni += poslednjaCifra;
+    }
+    broj1 = Math.floor(broj1 / 10);
+  }
+  return sumParni;
+}
+
+function glavna2funkcija(niz) {
+  let sum = 0;
+  for (let i = 0; i < niz.length; i++) {
+    sum += test2(niz[i]);
+  }
+  return sum;
+}
+
+console.log(glavna2funkcija(brojevi));
+
+//===================================================================================================================
